@@ -1,1 +1,1 @@
-web: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+web: curl -sf "https://raw.githubusercontent.com/leeyuhi6/trendscout-api/master/data/keywords.jsonl" -o data/keywords.jsonl && echo "Data updated: $(wc -l < data/keywords.jsonl) keywords" && uvicorn app.main:app --host 0.0.0.0 --port $PORT
