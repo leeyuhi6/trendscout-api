@@ -28,7 +28,6 @@ class TrendsDataService:
                 return
         except Exception as e:
             print(f"⚠️ 文件加载失败: {e}")
-
         try:
             from app.data_embedded import load_embedded_keywords
             raw_list = load_embedded_keywords()
@@ -60,24 +59,38 @@ class TrendsDataService:
     def search(self, query: Optional[str] = None, limit: int = 20) -> List[Dict]:
         if not query:
             return self.get_trending(limit)
-        
-        # 分词，过滤停用词（太短或太通用的词不参与匹配）
-        stopwords = {'a', 'an', 'the', 'and', 'or', 'for', 'to', 'of', 'in', 'on', 'at', 'vs', 'with'}
-        terms = [t.lower().strip() for t in query.split() 
-                 if t.strip() and t.lower().strip() not in stopwords and len(t.strip()) > 1]
-        
+
+        # 分词，过滤停用词
+        stopwords = {'a', 'an', 'the', 'and', 'or', 'for', 'to', 'of', 'in', 'on', 'at', 'with', 'free', 'best'}
+        all_terms = [t.lower().strip() for t in query.split() if t.strip()]
+        terms = [t for t in all_terms if t not in stopwords and len(t) > 1]
+
         if not terms:
             return self.get_trending(limit)
-        
-        # 纯 AND 逻辑：所有词都必须在关键词里
+
+        # 按长度排序，优先用长词匹配（更精确）
+        terms_by_len = sorted(terms, key=len, reverse=True)
+
+        # 策略：用最长的词（核心词）做主匹配，其余词加分
+        core_term = terms_by_len[0]
+        other_terms = terms_by_len[1:]
+
         results = []
         for kw in self.keywords:
             kw_lower = kw.get('keyword', '').lower()
-            if all(term in kw_lower for term in terms):
-                results.append(kw)
-        
-        results.sort(key=lambda x: x.get('avg_heat', 0), reverse=True)
-        return [self._format(r) for r in results[:limit]]
+            # 核心词必须命中
+            if core_term not in kw_lower:
+                continue
+            # 计算相关度分数（命中的其他词越多越靠前）
+            score = kw.get('avg_heat', 0)
+            for t in other_terms:
+                if t in kw_lower:
+                    score += 20  # 额外加分
+            results.append((score, kw))
+
+        # 按分数排序
+        results.sort(key=lambda x: x[0], reverse=True)
+        return [self._format(kw) for _, kw in results[:limit]]
 
     def get_trending(self, limit: int = 20) -> List[Dict]:
         valid = [kw for kw in self.keywords if kw.get('avg_heat', 0) > 10]
