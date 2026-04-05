@@ -11,7 +11,6 @@ class TrendsDataService:
     def load_data(self):
         """加载数据：优先文件，降级到内嵌数据"""
         try:
-            # 尝试从文件加载
             if os.path.exists(self.data_path) and os.path.getsize(self.data_path) > 10000:
                 seen = set()
                 raw = []
@@ -31,7 +30,7 @@ class TrendsDataService:
         except Exception as e:
             print(f"⚠️ 文件加载失败: {e}")
 
-        # 降级：从嵌入数据加载
+        # 降级：从内嵌数据加载
         try:
             from app.data_embedded import load_embedded_keywords
             raw_list = load_embedded_keywords()
@@ -63,8 +62,19 @@ class TrendsDataService:
     def search(self, query: Optional[str] = None, limit: int = 20) -> List[Dict]:
         if not query:
             return self.get_trending(limit)
-        q = query.lower().strip()
-        results = [kw for kw in self.keywords if q in kw.get('keyword', '').lower()]
+        # 拆词搜索：所有词都包含才命中（AND逻辑）
+        terms = [t.lower().strip() for t in query.split() if t.strip()]
+        results = []
+        for kw in self.keywords:
+            kw_lower = kw.get('keyword', '').lower()
+            if all(term in kw_lower for term in terms):
+                results.append(kw)
+        # 如果 AND 没结果，退回 OR 逻辑
+        if not results:
+            for kw in self.keywords:
+                kw_lower = kw.get('keyword', '').lower()
+                if any(term in kw_lower for term in terms):
+                    results.append(kw)
         results.sort(key=lambda x: x.get('avg_heat', 0), reverse=True)
         return [self._format(r) for r in results[:limit]]
 
