@@ -778,10 +778,8 @@
 {"keyword": "digital nomad", "avg_heat": 30.9, "recent_avg": 16.8, "growth_rate": -40.7, "trend": "falling", "markets": {"US": 30.9}, "active_markets": 1, "rising_queries": []}
 {"keyword": "productivity apps", "avg_heat": 26.8, "recent_avg": 8.8, "growth_rate": -36.4, "trend": "falling", "markets": {"US": 26.8}, "active_markets": 1, "rising_queries": []}
 {"keyword": "minimalist home decor", "avg_heat": 1.9, "recent_avg": 2.0, "growth_rate": 0, "trend": "stable", "markets": {"US": 1.9}, "active_markets": 1, "rising_queries": []}
-{"keyword": "zero-waste lifestyle", "avg_heat": 0.0, "recent_avg": 0.0, "growth_rate": 0, "trend": "stable", "markets": {"US": 0.0}, "active_markets": 1, "rising_queries": []}
 {"keyword": "budget travel", "avg_heat": 37.0, "recent_avg": 11.0, "growth_rate": -60.4, "trend": "falling", "markets": {"US": 37.0}, "active_markets": 1, "rising_queries": []}
 {"keyword": "handmade crafts", "avg_heat": 1.2, "recent_avg": 0.2, "growth_rate": -66.7, "trend": "falling", "markets": {"US": 1.2}, "active_markets": 1, "rising_queries": []}
-{"keyword": "mental health self-care", "avg_heat": 0.0, "recent_avg": 0.2, "growth_rate": 0, "trend": "stable", "markets": {"US": 0.0}, "active_markets": 1, "rising_queries": []}
 {"keyword": "side hustle ideas", "avg_heat": 0.6, "recent_avg": 0.2, "growth_rate": -75.0, "trend": "falling", "markets": {"US": 0.6}, "active_markets": 1, "rising_queries": []}
 {"keyword": "ai developer tools", "avg_heat": 6.6, "recent_avg": 3.0, "growth_rate": -45.5, "trend": "falling", "markets": {"US": 6.6}, "active_markets": 1, "rising_queries": []}
 {"keyword": "llm application", "avg_heat": 5.9, "recent_avg": 2.5, "growth_rate": -60.0, "trend": "falling", "markets": {"US": 5.9}, "active_markets": 1, "rising_queries": []}
@@ -796,7 +794,6 @@
 {"keyword": "no-code ai", "avg_heat": 0.5, "recent_avg": 0.0, "growth_rate": 0, "trend": "stable", "markets": {"US": 0.5}, "active_markets": 1, "rising_queries": []}
 {"keyword": "ai api", "avg_heat": 23.5, "recent_avg": 11.8, "growth_rate": -39.7, "trend": "falling", "markets": {"US": 23.5}, "active_markets": 1, "rising_queries": []}
 {"keyword": "claude ai", "avg_heat": 52.8, "recent_avg": 77.5, "growth_rate": 273.5, "trend": "rising", "markets": {"US": 52.8}, "active_markets": 1, "rising_queries": []}
-{"keyword": "gpt-4 alternatives", "avg_heat": 0.0, "recent_avg": 0.0, "growth_rate": 0, "trend": "stable", "markets": {"US": 0.0}, "active_markets": 1, "rising_queries": []}
 {"keyword": "mistral ai", "avg_heat": 2.2, "recent_avg": 1.5, "growth_rate": -25.0, "trend": "falling", "markets": {"US": 2.2}, "active_markets": 1, "rising_queries": []}
 {"keyword": "ai search engine", "avg_heat": 5.6, "recent_avg": 2.8, "growth_rate": -45.0, "trend": "falling", "markets": {"US": 5.6}, "active_markets": 1, "rising_queries": []}
 {"keyword": "perplexity ai", "avg_heat": 68.6, "recent_avg": 49.0, "growth_rate": -31.7, "trend": "falling", "markets": {"US": 68.6}, "active_markets": 1, "rising_queries": []}
@@ -858,3 +855,7 @@
 {"keyword": "supabase review", "avg_heat": 35.8, "recent_avg": 18.8, "growth_rate": -15.7, "trend": "stable", "markets": {"US": 35.8}, "active_markets": 1, "rising_queries": []}
 {"keyword": "planetscale review", "avg_heat": 0.2, "recent_avg": 0.2, "growth_rate": 0, "trend": "stable", "markets": {"US": 0.2}, "active_markets": 1, "rising_queries": []}
 {"keyword": "vercel alternatives", "avg_heat": 3.3, "recent_avg": 2.0, "growth_rate": -46.7, "trend": "falling", "markets": {"US": 3.3}, "active_markets": 1, "rising_queries": []}
+{"keyword": "digital nomad essentials", "avg_heat": 12.0, "recent_avg": 13.0, "growth_rate": 8.0, "trend": "stable", "markets": {"US": 12.0}, "active_markets": 1, "rising_queries": []}
+{"keyword": "sustainable living products", "avg_heat": 18.0, "recent_avg": 19.0, "growth_rate": 5.0, "trend": "stable", "markets": {"US": 18.0}, "active_markets": 1, "rising_queries": []}
+{"keyword": "handmade craft supplies", "avg_heat": 8.0, "recent_avg": 9.0, "growth_rate": 12.0, "trend": "stable", "markets": {"US": 8.0}, "active_markets": 1, "rising_queries": []}
+{"keyword": "zero-waste lifestyle tips", "avg_heat": 11.0, "recent_avg": 12.0, "growth_rate": 9.0, "trend": "stable", "markets": {"US": 11.0}, "active_markets": 1, "rising_queries": []}
