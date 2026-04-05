@@ -31,3 +31,12 @@ async def get_trending(limit: int = Query(20, ge=1, le=100)):
         "trends": trends,
         "total": len(trends)
     }
+
+@router.get("/rising")
+async def get_rising(limit: int = Query(20, ge=1, le=100)):
+    """获取上升趋势词（growth_rate > 20%）"""
+    rising = trends_service.get_rising(limit)
+    return {
+        "trends": rising,
+        "total": len(rising)
+    }
