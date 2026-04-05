@@ -9,7 +9,6 @@ class TrendsDataService:
         self.load_data()
 
     def load_data(self):
-        """加载数据：优先文件，降级到内嵌数据"""
         try:
             if os.path.exists(self.data_path) and os.path.getsize(self.data_path) > 10000:
                 seen = set()
@@ -30,7 +29,6 @@ class TrendsDataService:
         except Exception as e:
             print(f"⚠️ 文件加载失败: {e}")
 
-        # 降级：从内嵌数据加载
         try:
             from app.data_embedded import load_embedded_keywords
             raw_list = load_embedded_keywords()
@@ -62,19 +60,22 @@ class TrendsDataService:
     def search(self, query: Optional[str] = None, limit: int = 20) -> List[Dict]:
         if not query:
             return self.get_trending(limit)
-        # 拆词搜索：所有词都包含才命中（AND逻辑）
-        terms = [t.lower().strip() for t in query.split() if t.strip()]
+        
+        # 分词，过滤停用词（太短或太通用的词不参与匹配）
+        stopwords = {'a', 'an', 'the', 'and', 'or', 'for', 'to', 'of', 'in', 'on', 'at', 'vs', 'with'}
+        terms = [t.lower().strip() for t in query.split() 
+                 if t.strip() and t.lower().strip() not in stopwords and len(t.strip()) > 1]
+        
+        if not terms:
+            return self.get_trending(limit)
+        
+        # 纯 AND 逻辑：所有词都必须在关键词里
         results = []
         for kw in self.keywords:
             kw_lower = kw.get('keyword', '').lower()
             if all(term in kw_lower for term in terms):
                 results.append(kw)
-        # 如果 AND 没结果，退回 OR 逻辑
-        if not results:
-            for kw in self.keywords:
-                kw_lower = kw.get('keyword', '').lower()
-                if any(term in kw_lower for term in terms):
-                    results.append(kw)
+        
         results.sort(key=lambda x: x.get('avg_heat', 0), reverse=True)
         return [self._format(r) for r in results[:limit]]
 
